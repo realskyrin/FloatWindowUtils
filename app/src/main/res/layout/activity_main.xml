@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/btn_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="显示" />
+
+    <Button
+        android:id="@+id/btn_remove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="移除" />
+
+    <Button
+        android:id="@+id/btn_ops"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="授权应用悬浮权限" />
+
+    <Switch
+        android:id="@+id/sw_autoalign"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text=" 自动贴边" />
+
+    <Switch
+        android:id="@+id/sw_modely"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text=" 模态窗口（事件不能穿透悬浮窗）" />
+
+    <Switch
+        android:id="@+id/sw_move"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text=" 可拖动" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" ········" />
+
+</LinearLayout>
