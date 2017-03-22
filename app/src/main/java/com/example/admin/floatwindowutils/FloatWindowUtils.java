@@ -70,7 +70,7 @@ public class FloatWindowUtils {
 
     private void initWindowManager() {
         mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
-        //获取一个DisplayMetrics对象，该对象描述关于显示器的一般信息的结构，例如其大小，密度和字体缩放。
+        //获取一个DisplayMetrics对象，该对象用来描述关于显示器的一些信息，例如其大小，密度和字体缩放。
         mDisplayMetrics = new DisplayMetrics();
         mWindowManager.getDefaultDisplay().getMetrics(mDisplayMetrics);
     }
