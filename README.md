@@ -12,4 +12,4 @@
     floatWindow.show();
 ```
 ### 示例
-![](Example2.gif)
+![](example.gif)
