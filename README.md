@@ -13,3 +13,5 @@
 ```
 ### 示例
 ![](example.gif)
+
+### [详见简书](http://www.jianshu.com/p/a23cfb8f2e5f)
