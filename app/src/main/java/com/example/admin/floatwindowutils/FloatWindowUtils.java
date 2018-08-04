@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Binder;
+import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
@@ -97,7 +98,11 @@ public class FloatWindowUtils {
         mLayoutParams.gravity = Gravity.LEFT | Gravity.TOP;
         mLayoutParams.format = PixelFormat.RGBA_8888;
         //此处mLayoutParams.type不建议使用TYPE_TOAST，因为在一些三方ROM中会出现拖动异常的问题，虽然它不需要权限
-        mLayoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            mLayoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        }else {
+            mLayoutParams.type =  WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+        }
         //悬浮窗背景明暗度0~1，数值越大背景越暗，只有在flags设置了WindowManager.LayoutParams.FLAG_DIM_BEHIND 这个属性才会生效
         mLayoutParams.dimAmount = 0.0f;
         //悬浮窗透明度0~1，数值越大越不透明

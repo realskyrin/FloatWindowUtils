@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -135,5 +136,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         return view;
+    }
+
+    private View getBtn(){
+        Button mBtn = new Button(this);
+        mBtn.setText("悬浮按钮");
+        mBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,"click",Toast.LENGTH_SHORT).show();
+            }
+        });
+        return mBtn;
     }
 }
