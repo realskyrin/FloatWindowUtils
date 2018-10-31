@@ -1,17 +1,23 @@
-# 一个悬浮创建工具类
+# A useful class that makes it easier to create floating windows
 
-### 如何使用
+### How to use
 ```java
-    View contentView = LayoutInflater.from(context).inflate(R.layout.fv_test,null);
+View contentView = LayoutInflater.from(context).inflate(R.layout.fv_test,null);
     
-    FloatWindowUtils floatWindow = new FloatWindowUtils.Builder(context,contentView)
-            .setAutoAlign(true) //是否自动贴边
-            .setModality(false) //是否模态窗口
-            .setMoveAble(true) //是否可拖动
+FloatWindow floatWindow = new FloatWindow.With(this, layout)
+            .setModality(false)
+            .setMoveAble(true)
+            .setAutoAlign(true)
+            .setAlpha(0.5f)
+            .setWidth(WindowManager.LayoutParams.WRAP_CONTENT)
+            .setHeight(WindowManager.LayoutParams.MATCH_PARENT)
             .create();
-    floatWindow.show();
+// Displayed on the screen
+floatWindow.show();
+// Remove from the screen
+floatWindow.remove();
 ```
-### 示例
+### Example
 ![](example.gif)
 
 ### [详见简书](http://www.jianshu.com/p/a23cfb8f2e5f)
