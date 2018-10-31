@@ -13,12 +13,12 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     Context context;
-    FloatWindowUtils floatWindow;
+    FloatWindow floatWindow;
     View contentView;
 
-    Switch sw_autoalign;
-    Switch sw_modely;
-    Switch sw_move;
+    Switch swAutoalign;
+    Switch swModely;
+    Switch swMove;
 
     boolean isAutoAlign;
     boolean isModality;
@@ -34,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_show).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!FloatWindow.isAppOpsOn(MainActivity.this)) {
+                    FloatWindow.openOpsSettings(MainActivity.this);
+                    return;
+                }
                 initFloatWindow(contentView);
             }
         });
@@ -41,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_remove).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (floatWindow!=null){
+                if (floatWindow != null) {
                     floatWindow.remove();
                 }
             }
@@ -50,31 +54,29 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_ops).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!FloatWindowUtils.openOpsSettings(MainActivity.this)){
-                    FloatWindowUtils.openAppSettings(MainActivity.this);
-                }
+                FloatWindow.openOpsSettings(MainActivity.this);
             }
         });
 
-        sw_autoalign = (Switch) findViewById(R.id.sw_autoalign);
-        sw_modely = (Switch) findViewById(R.id.sw_modely);
-        sw_move = (Switch) findViewById(R.id.sw_move);
+        swAutoalign = (Switch) findViewById(R.id.sw_autoalign);
+        swModely = (Switch) findViewById(R.id.sw_modely);
+        swMove = (Switch) findViewById(R.id.sw_move);
 
-        sw_autoalign.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        swAutoalign.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 isAutoAlign = isChecked;
                 initFloatWindow(contentView);
             }
         });
-        sw_modely.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        swModely.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 isModality = isChecked;
                 initFloatWindow(contentView);
             }
         });
-        sw_move.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        swMove.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 isMoveAble = isChecked;
@@ -85,14 +87,15 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * 初始化floatWindow
+     *
      * @param view
      */
-    private void initFloatWindow(View view){
-        if (floatWindow!=null){
+    private void initFloatWindow(View view) {
+        if (floatWindow != null) {
             floatWindow.remove();
-            floatWindow=null;
+            floatWindow = null;
         }
-        floatWindow = new FloatWindowUtils.Builder(context,view)
+        floatWindow = new FloatWindow.With(context, view)
                 .setAutoAlign(isAutoAlign)
                 .setModality(isModality)
                 .setMoveAble(isMoveAble)
@@ -102,21 +105,22 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * 创建一个需要悬浮的视图
+     *
      * @return
      */
     private View getContentView() {
-        View view = LayoutInflater.from(context).inflate(R.layout.fv_test,null);
+        View view = LayoutInflater.from(context).inflate(R.layout.fv_test, null);
         final View ll_menu = view.findViewById(R.id.ll_btn);
         view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"button",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "button", Toast.LENGTH_SHORT).show();
             }
         });
         view.findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"button2",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "button2", Toast.LENGTH_SHORT).show();
             }
         });
         view.findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
@@ -128,9 +132,9 @@ public class MainActivity extends AppCompatActivity {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ll_menu.getVisibility()==View.VISIBLE){
+                if (ll_menu.getVisibility() == View.VISIBLE) {
                     ll_menu.setVisibility(View.GONE);
-                }else {
+                } else {
                     ll_menu.setVisibility(View.VISIBLE);
                 }
             }
@@ -138,13 +142,13 @@ public class MainActivity extends AppCompatActivity {
         return view;
     }
 
-    private View getBtn(){
+    private View getBtn() {
         Button mBtn = new Button(this);
         mBtn.setText("悬浮按钮");
         mBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"click",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "click", Toast.LENGTH_SHORT).show();
             }
         });
         return mBtn;
