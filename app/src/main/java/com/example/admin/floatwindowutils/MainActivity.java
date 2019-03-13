@@ -11,7 +11,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
+    private static final String TAG = MainActivity.class.getSimpleName();
     Context context;
     FloatWindow floatWindow;
     View contentView;
